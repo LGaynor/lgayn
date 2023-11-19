@@ -1,1 +1,30 @@
-
+namespace MaxAve
+{
+    internal class Program
+    {
+        public static double FindMaxAverage(int[] nums, int k)
+        {
+            double sum =0;
+            //needs the sum of the first 0-3 in int
+            for (int i = 0; i < k; i++)
+            {
+                sum += nums[i];
+            }
+            double result = sum;
+            //starting the siding window. Removes nums[0] moves 
+            for (int i = k; i < nums.Length; i++)
+            {
+                sum += nums[i] - nums[i-k];
+               result = Math.Max(result, sum);
+            }
+            //returns average
+            return result/k;
+        }
+        static void Main(string[] args)
+        {
+            int[] arr = { 1, 12, -5, -6, 50, 3 };
+            int k = 4;
+           Console.WriteLine( FindMaxAverage(arr, k));
+        }
+    }
+}
